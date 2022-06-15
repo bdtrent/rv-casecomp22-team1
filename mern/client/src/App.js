@@ -8,6 +8,8 @@ import Navbar from "./components/navbar";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import Homepage from "./components/homepage";
+
+import "./App.css";
  
 const App = () => {
  return (
