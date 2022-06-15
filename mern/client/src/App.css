@@ -1,3 +1,11 @@
+body{
+    width: 960px;
+    margin: auto;
+}
+#navbar{
+    
+}
+
 #initialSelection{
-    margin: 0 auto;
+    margin-left: auto;
 }

@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 // Here, we display our Navbar
 export default function Navbar() {
  return (
-   <div>
+   <div id="navbar">
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
        <NavLink className="navbar-brand" to="/">
        <img src="assets/movie-trivia.png" alt="Movie Trivia" style={{"width" : 50 + '%'}} id="logo"></img>
