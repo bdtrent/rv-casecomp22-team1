@@ -18,7 +18,7 @@ const App = () => {
        <Route exact path="/" element={<RecordList />} />
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/create" element={<Create />} />
-       <Route path="/" element={<Homepage />}/>
+       <Route exact path="/" element={<Homepage />}/>
      </Routes>
    </div>
  );
