@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './quiz.css';
 
 const ProgressBar = ({
     currentQuestion, questionCount
@@ -101,11 +102,24 @@ export default function Quiz() {
         }
     }
 
+    const handleRetakeQuiz = () => {
+        setCurrentQuestion(0);
+        setCorrectAnswer(null);
+        setAnswerStatus(null);
+        setShowScore(false);
+        setScore(0);
+    }
+
     return (
         <div className='quiz'>
             {showScore ? (
                 <div className='score-section'>
                     You scored {score} out of {questions.length}
+                    <div>
+                    <button className='retake' onClick={handleRetakeQuiz}>
+                    Retake this quiz
+                    </button>
+                    </div>
                 </div>
             ): (
                 <>
@@ -117,17 +131,17 @@ export default function Quiz() {
                     </div>
                     <div className='answers'>
                         {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-                            <button onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{answerOption.answerText}</button>
+                            <div key={index} className='answer' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{answerOption.answerText}</div>
                         ))}
                     </div>
                     {answerStatus != null && (
                         <div>
                             <div className='answerResult'>
-                                <span>{correctAnswer}</span>
-                                <button className='next' onClick={onNextClick}>
+                                {correctAnswer}
+                            </div>
+                            <button className='next' onClick={onNextClick}>
                                     {currentQuestion === questions.length - 1 ? "See results" : "Next Question"}
                                 </button>
-                            </div>
                         </div>
                     )}
                 </>
