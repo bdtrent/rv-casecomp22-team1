@@ -11,7 +11,7 @@ export default function Homepage(){
             <div id="initialSelection">
                 {quizzes.map(quizzes => {
                     return(
-                        <button key={quizzes.id}>Take {quizzes.name} Genre Quiz</button>
+                        <button key={quizzes.id}>Start {quizzes.name} Genre Quiz</button>
                     )
                 })}
             </div>
