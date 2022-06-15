@@ -3,9 +3,14 @@ body{
     margin: auto;
 }
 #navbar{
-    
+
 }
 
+#homeTitle{
+    display: flex;
+    justify-content: center;
+}
 #initialSelection{
-    margin-left: auto;
+    display: flex;
+    justify-content: center;
 }
