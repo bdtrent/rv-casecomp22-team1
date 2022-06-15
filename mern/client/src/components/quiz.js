@@ -24,7 +24,7 @@ export default function Quiz() {
                 { answerText: 'Psycho'},
                 { answerText: 'Vertigo'}
             ],
-            correctIndex: 2
+            correctIndex: 1
         },
         {
             questionText: 'Which of the following movies does NOT have a sequel?',
@@ -34,7 +34,7 @@ export default function Quiz() {
                 {answerText: 'Shutter Island'},
                 {answerText: 'The Conjuring'}
             ],
-            correctIndex: 3
+            correctIndex: 2
         },
         {
             questionText: 'What is the name of the evil doll in Child\'s Play?',
@@ -44,7 +44,7 @@ export default function Quiz() {
                 {answerText:'Chastity'},
                 {answerText:'Chase'}
             ],
-            correctIndex: 2
+            correctIndex: 1
         },
         {
             questionText: 'In which movie do the killers wear fox, tiger, and lamb masks?',
@@ -54,7 +54,7 @@ export default function Quiz() {
                 {answerText: 'A Nightmare on Elm Street'},
                 {answerText: 'You\'re Next'}
             ],
-            correctIndex: 4
+            correctIndex: 3
         },
         {
             questionText: 'Which film is directed by Ari Aster?',
@@ -64,7 +64,7 @@ export default function Quiz() {
                 {answerText: 'Sharknado'},
                 {answerText:'My Bloody Valentine'}
             ],
-            correctIndex: 2
+            correctIndex: 1
         }
     ];
 
@@ -77,13 +77,17 @@ export default function Quiz() {
 
     // Event whenever an answer is clicked
     const handleAnswerOptionClick = (isCorrect) => {
-        // Increment player score if correct option selected
-        if (isCorrect) {
-            setScore(score + 1);
+        if(correctAnswer == null) {
+            // Increment player score if correct option selected
+            if (isCorrect) {
+                setScore(score + 1);
+                setCorrectAnswer("Correct!");
+            }
+            else {
+                setCorrectAnswer("Incorrect, the correct answer was: "+ questions[currentQuestion].answerOptions[questions[currentQuestion].correctIndex].answerText)
+            }
+            setAnswerStatus(isCorrect);
         }
-        let thisQuestion = questions[currentQuestion];
-        setCorrectAnswer(thisQuestion.answerOptions[thisQuestion.correctIndex].answerText);
-        setAnswerStatus(isCorrect);
     }
 
     const onNextClick = () => { 
@@ -92,6 +96,7 @@ export default function Quiz() {
             setShowScore(true);
         } else {
             setCurrentQuestion(currentQuestion+1)
+            setCorrectAnswer(null);
             setAnswerStatus(null);
         }
     }
@@ -118,7 +123,7 @@ export default function Quiz() {
                     {answerStatus != null && (
                         <div>
                             <div className='answerResult'>
-                                {answerStatus ? "Correct!" : "Incorrect, the correct answer was: " + {correctAnswer}}
+                                <span>{correctAnswer}</span>
                                 <button className='next' onClick={onNextClick}>
                                     {currentQuestion === questions.length - 1 ? "See results" : "Next Question"}
                                 </button>
