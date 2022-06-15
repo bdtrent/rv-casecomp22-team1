@@ -1,5 +1,9 @@
 import React from "react";
 
+const quizzes = [{
+    name: "Horror", 
+    name: "General" 
+    }]
 export default function Homepage(){
     return(
         <div>
