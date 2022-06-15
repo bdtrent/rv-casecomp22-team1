@@ -1,16 +1,19 @@
 import React from "react";
 
-const quizzes = [{
-    name: "Horror", 
-    name: "General"
-}]
+const quizzes = [
+    { id: 1, name: "Horror"},
+    { id: 2, name: "General"}
+];
 export default function Homepage(){
     return(
         <div>
             <h2 id="homeTitle">Choose Your Trivia!</h2>
             <div id="initialSelection">
-                <button>Horror Genre Quiz</button>
-                <button>General Genre Quiz!</button>
+                {quizzes.map(quizzes => {
+                    return(
+                        <button key={quizzes.id}>Take {quizzes.name} Genre Quiz</button>
+                    )
+                })}
             </div>
         </div>
     );
