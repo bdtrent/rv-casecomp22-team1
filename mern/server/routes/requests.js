@@ -8,7 +8,7 @@ const requestRoutes = express.Router();
 // This will return movie data to the front end given an IMDB movie ID.
 requestRoutes.route("/request").getDataByID(function (req, res) {
     let request = new XMLHttpRequest();
-    let url = "http://www.omdbapi.com/?i=" + req.params.id + "&apikey=<1558749f>";
+    let url = "http://www.omdbapi.com/?i=" + req.params.id + "&apikey=1558749f";
     request.open("GET", url)
     request.send()
     request.onload = () => {
@@ -21,3 +21,16 @@ requestRoutes.route("/request").getDataByID(function (req, res) {
         }
     }
 });
+
+// Function getQuizByQuizName
+// This section will help you get a single record by Quiz Name
+requestsRoutes.route("/request/:quizName").get(function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = { quizName: ObjectId( req.params.quizName)};
+    db_connect
+        .collection("Quizzes")
+        .findOne(myquery, function (err, result) {
+          if (err) throw err;
+          res.json(result);
+        });
+   });
