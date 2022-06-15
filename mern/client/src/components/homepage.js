@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 const quizzes = [
     { id: 1, name: "Horror"},
@@ -11,7 +12,7 @@ export default function Homepage(){
             <div id="initialSelection">
                 {quizzes.map(quizzes => {
                     return(
-                        <button key={quizzes.id}>Start {quizzes.name} Genre Quiz</button>
+                        <Button key={quizzes.id}>Start {quizzes.name} Genre Quiz</Button>
                     )
                 })}
             </div>
