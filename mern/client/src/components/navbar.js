@@ -12,7 +12,7 @@ export default function Navbar() {
    <div>
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
        <NavLink className="navbar-brand" to="/">
-       <img style={{"width" : 25 + '%'}} src="../../public/assets/movie-trivia.png"></img>
+       <img src="../../public/assets/movie-trivia.png" alt="Movie Trivia" style={{"width" : 25 + '%'}} ></img>
        </NavLink>
        <button
          className="navbar-toggler"
