@@ -1,0 +1,27 @@
+/*
+Color Palette "room for comfort":
+    #e7d2cc
+    #b9b7bd
+    #868b8e
+    #eeede7
+*/
+html{
+    background-color: #868b8e;
+}
+body{
+    background-color: #e7d2cc;
+    width: 960px;
+    margin: auto;
+}
+#navbar{
+    background-color: #b9b7bd;
+}
+
+#homeTitle{
+    display: flex;
+    justify-content: center;
+}
+#initialSelection{
+    display: flex;
+    justify-content: center;
+}
