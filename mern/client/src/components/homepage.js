@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const quizzes = [
     { id: 1, name: "Horror"},
-    { id: 2, name: "Rom-Com"}
+    { id: 2, name: "RomCom"}
 ];
 
 export default function Homepage(){
@@ -18,13 +18,13 @@ export default function Homepage(){
                         return(
                             <Col key={quizzes.id}>
                                 <Card style={{ width: '18rem' }}>
-                                <Card.Img class="cardCover" variant="top" src={"assets/"+quizzes.name+".png"} />
+                                <Card.Img className="cardCover" variant="top" src={"assets/"+quizzes.name+".png"} />
                                 <Card.Body>
                                     <Card.Title>{quizzes.name} Trivia</Card.Title>
                                     <Card.Text>
                                    
                                     </Card.Text>
-                                    <Link to={`/quiz/${quizzes.name}`}>
+                                    <Link to={`/quiz${quizzes.name}`}>
                                         <Button variant="primary">Start Quiz</Button>
                                     </Link>
                                 </Card.Body>

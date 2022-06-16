@@ -8,6 +8,8 @@ import Navbar from "./components/navbar";
 import Homepage from "./components/homepage";
 
 import "./App.css";
+import HorrorQuiz from "./components/quizHorror"
+import RomcomQuiz from "./components/quizRomCom"
  
 const App = () => {
  return (
@@ -15,7 +17,8 @@ const App = () => {
      <Navbar />
      <Routes>
       <Route exact path="/" element={<Homepage />}/>
-      <Route path="/quiz/:quizName"/>
+      <Route path="/quizHorror" element={<HorrorQuiz />}/>
+      <Route path="/quizRomCom" element={<RomcomQuiz />}/>
      </Routes>
    </div>
  );
