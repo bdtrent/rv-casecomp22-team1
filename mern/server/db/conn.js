@@ -9,13 +9,17 @@ var _db;
  
 module.exports = {
   connectToServer: function (callback) {
-    client.connect(function (err, db) {
+    client.connect(async function (err, db) {
       // Verify we got a good "db" object
       if (db)
       {
         _db = db.db("MovieWiz");
         
-        if (_db.collection('Quizzes').countDocuments() == 0){
+        docCount = await _db.collection('Quizzes').countDocuments();
+        
+        console.log(docCount)
+        if (docCount == 0){
+          
             let quiz = {
               quizName: 'HorrorQuiz',
               
@@ -64,15 +68,6 @@ module.exports = {
                   answers: [{answerText: 'tt0081505'}, {answerText: 'tt7784604'} 
                   ,{answerText: 'tt2724064'}, {answerText: 'tt1179891'}],
                   correctIndex: 1
-                  }
-                },
-                { QuizQuestion: {
-                  isMulti: true,
-                  id:  '',
-                  question: 'The quote, “Do you like scary movies?” was made famous by which of the following movies?',
-                  answers: [{answerText: 'tt0081505'}, {answerText: 'tt0054215'} 
-                  ,{answerText: 'tt0077651'}, {answerText: 'tt0117571'}],
-                  correctIndex: 3
                   }
                 },
                 { QuizQuestion: {
