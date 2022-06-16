@@ -25,26 +25,8 @@ export default function Navbar() {
        >
          <span className="navbar-toggler-icon"></span>
        </button>
-<<<<<<< HEAD
- 
-       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul className="navbar-nav ml-auto">
-           <li className="nav-item">
-             <NavLink className="nav-link" to="/create">
-               Create Record
-             </NavLink>
-           </li>
-           <li className="nav-item">
-             <NavLink className="nav-link" to="/quiz">
-               Take Quiz
-             </NavLink>
-           </li>
-         </ul>
-       </div>
-=======
 
 
->>>>>>> ccaa3a4b873989a631f5caf839ce90b85c6eb1ab
      </nav>
    </div>
  );
