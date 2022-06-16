@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './quiz.css';
 
 const ProgressBar = ({
@@ -15,6 +15,46 @@ const ProgressBar = ({
 }
 
 export default function Quiz() {
+
+    const [quiz, setQuiz] = useState([]);
+    useEffect(() => {
+        async function getQuiz() {
+            const response = await fetch(`http://localhost:5000/quiz/${params.name.toString()}`)
+            
+            if (!response.ok) {
+                const message = `An error has occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+              }
+          
+              const dbQuiz = await response.json();
+              if (!dbQuiz) {
+                window.alert(`Quiz with name ${params.name.toString()} not found`);
+                navigate("/");
+                return;
+              }
+    
+              let quiz = dbQuiz.quizQuestions;
+              let currentIndex = quiz.length, randomIndex;
+    
+              while (currentIndex != 0 ) {
+                  randomIndex = Math.floor(Math.random() * currentIndex);
+                  currentIndex--;
+    
+                  [quiz[currentIndex], quiz[randomIndex]] = [quiz[randomIndex], quiz[currentIndex]];
+              }
+    
+              while (quiz.length > 5) {
+                  quiz.pop();
+              }
+
+              setQuiz(quiz);
+        }
+
+        getQuiz();
+
+        return;
+    })
     // Hard coded quiz object, replace with quiz pulled from DB
     const questions = [
         {
@@ -110,7 +150,14 @@ export default function Quiz() {
         setScore(0);
     }
 
+    async function getMovie(answerText) {
+        const response = await fetch(`http://localhost:5000/requests/getMovie/${answerText}`);
+        const movie = await response.json();
+        return movie.Poster;
+    }
+
     return (
+
         <div className='quiz'>
             {showScore ? (
                 <div className='score-section'>
@@ -130,9 +177,14 @@ export default function Quiz() {
                         </div>
                     </div>
                     <div className='answers'>
-                        {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-                            <div key={index} className='answer' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{answerOption.answerText}</div>
-                        ))}
+                        {questions[currentQuestion].isMulti
+                            ? questions[currentQuestion].answers.map((answer, index) => (
+                            <div key={index} className='answerCard' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{getMovie(answer.answerText)}</div>
+                            ))
+                            : questions[currentQuestion].answer.map((answer, index) => (
+                                <div key={index} className='answerText' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{answer.answerText}</div>
+                            ))
+                        }
                     </div>
                     {answerStatus != null && (
                         <div>
