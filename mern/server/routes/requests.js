@@ -5,8 +5,11 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const requestRoutes = express.Router();
 
+const ObjectId = require("mongodb").ObjectId;
+
+
 // This will return movie data to the front end given an IMDB movie ID.
-requestRoutes.route("/request").getDataByID(function (req, res) {
+requestRoutes.route("/requests/getDataByID").get(function (req, res) {
     let request = new XMLHttpRequest();
     let url = "http://www.omdbapi.com/?i=" + req.params.id + "&apikey=1558749f";
     request.open("GET", url)
@@ -24,7 +27,7 @@ requestRoutes.route("/request").getDataByID(function (req, res) {
 
 // Function getQuizByQuizName
 // This section will help you get a single record by Quiz Name
-requestsRoutes.route("/request/:quizName").get(function (req, res) {
+requestRoutes.route("/requests/getQuiz").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { quizName: ObjectId( req.params.quizName)};
     db_connect
@@ -34,3 +37,5 @@ requestsRoutes.route("/request/:quizName").get(function (req, res) {
           res.json(result);
         });
    });
+
+module.exports = requestRoutes;   
