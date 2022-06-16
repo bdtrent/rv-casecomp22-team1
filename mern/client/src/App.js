@@ -14,8 +14,8 @@ const App = () => {
    <div>
      <Navbar />
      <Routes>
-       <Route path="/" element={<Homepage />}/>
-
+      <Route exact path="/" element={<Homepage />}/>
+      <Route path="/quiz/:quizName"/>
      </Routes>
    </div>
  );

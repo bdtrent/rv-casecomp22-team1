@@ -24,7 +24,7 @@ export default function Homepage(){
                                     <Card.Text>
                                    
                                     </Card.Text>
-                                    <Link to="./quiz">
+                                    <Link to={`/quiz/${quizzes.name}`}>
                                         <Button variant="primary">Start Quiz</Button>
                                     </Link>
                                 </Card.Body>
