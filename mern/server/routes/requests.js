@@ -9,7 +9,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 // This will return movie data to the front end given an IMDB movie ID.
-requestRoutes.route("/requests/getDataByID").get(function (req, res) {
+requestRoutes.route("/requests/getMovie/:id").get(function (req, res) {
     let request = new XMLHttpRequest();
     let url = "http://www.omdbapi.com/?i=" + req.params.id + "&apikey=1558749f";
     request.open("GET", url)
@@ -27,7 +27,7 @@ requestRoutes.route("/requests/getDataByID").get(function (req, res) {
 
 // Function getQuizByQuizName
 // This section will help you get a single record by Quiz Name
-requestRoutes.route("/requests/getQuiz").get(function (req, res) {
+requestRoutes.route("/requests/getQuiz/:quizName").get(function (req, res) {
     let db_connect = dbo.getDb();
     let myquery = { quizName: ObjectId( req.params.quizName)};
     db_connect

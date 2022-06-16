@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useParams, useNavigate } from "react-router";
 import './quiz.css';
 
 const ProgressBar = ({
@@ -17,9 +18,11 @@ const ProgressBar = ({
 export default function Quiz() {
 
     const [quiz, setQuiz] = useState([]);
+    const navigate = useNavigate();
+    const params = useParams();
     useEffect(() => {
         async function getQuiz() {
-            const response = await fetch(`http://localhost:5000/quiz/${params.name.toString()}`)
+            const response = await fetch(`http://localhost:5000/requests/getQuiz/${params.name.toString()}`)
             
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`;
@@ -56,6 +59,7 @@ export default function Quiz() {
         return;
     })
     // Hard coded quiz object, replace with quiz pulled from DB
+    /*
     const questions = [
         {
             questionText: 'Which of the following movies was NOT directed by Alfred Hitchcock?',
@@ -108,6 +112,7 @@ export default function Quiz() {
             correctIndex: 1
         }
     ];
+    */
 
     // State values for quiz game
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -125,7 +130,7 @@ export default function Quiz() {
                 setCorrectAnswer("Correct!");
             }
             else {
-                setCorrectAnswer("Incorrect, the correct answer was: "+ questions[currentQuestion].answerOptions[questions[currentQuestion].correctIndex].answerText)
+                setCorrectAnswer("Incorrect, the correct answer was: "+ quiz[currentQuestion].answers[quiz[currentQuestion].correctIndex].answerText)
             }
             setAnswerStatus(isCorrect);
         }
@@ -133,7 +138,7 @@ export default function Quiz() {
 
     const onNextClick = () => { 
         // Move on to next question if there is one, otherwise show results
-        if (currentQuestion+1 === questions.length) {
+        if (currentQuestion+1 === quiz.length) {
             setShowScore(true);
         } else {
             setCurrentQuestion(currentQuestion+1)
@@ -153,7 +158,7 @@ export default function Quiz() {
     async function getMovie(answerText) {
         const response = await fetch(`http://localhost:5000/requests/getMovie/${answerText}`);
         const movie = await response.json();
-        return movie.Poster;
+        return <img src={movie.Poster}></img>
     }
 
     return (
@@ -161,7 +166,7 @@ export default function Quiz() {
         <div className='quiz'>
             {showScore ? (
                 <div className='score-section'>
-                    You scored {score} out of {questions.length}
+                    You scored {score} out of {quiz.length}
                     <div>
                     <button className='retake' onClick={handleRetakeQuiz}>
                     Retake this quiz
@@ -170,19 +175,19 @@ export default function Quiz() {
                 </div>
             ): (
                 <>
-                    <ProgressBar currentQuestion={currentQuestion} questionCount={questions.length} />
+                    <ProgressBar currentQuestion={currentQuestion} questionCount={quiz.length} />
                     <div className='question'>
                         <div className='question-text'>
-                            {questions[currentQuestion].questionText}
+                            {quiz[currentQuestion].question}
                         </div>
                     </div>
                     <div className='answers'>
-                        {questions[currentQuestion].isMulti
-                            ? questions[currentQuestion].answers.map((answer, index) => (
-                            <div key={index} className='answerCard' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{getMovie(answer.answerText)}</div>
+                        {quiz[currentQuestion].isMulti
+                            ? quiz[currentQuestion].answers.map((answer, index) => (
+                            <div key={index} className='answerCard' onClick={() => handleAnswerOptionClick(index === quiz[currentQuestion].correctIndex)}>{getMovie(answer.answerText)}</div>
                             ))
-                            : questions[currentQuestion].answer.map((answer, index) => (
-                                <div key={index} className='answerText' onClick={() => handleAnswerOptionClick(index === questions[currentQuestion].correctIndex)}>{answer.answerText}</div>
+                            : quiz[currentQuestion].answer.map((answer, index) => (
+                                <div key={index} className='answerText' onClick={() => handleAnswerOptionClick(index === quiz[currentQuestion].correctIndex)}>{answer.answerText}</div>
                             ))
                         }
                     </div>
@@ -192,7 +197,7 @@ export default function Quiz() {
                                 {correctAnswer}
                             </div>
                             <button className='next' onClick={onNextClick}>
-                                    {currentQuestion === questions.length - 1 ? "See results" : "Next Question"}
+                                    {currentQuestion === quiz.length - 1 ? "See results" : "Next Question"}
                                 </button>
                         </div>
                     )}
