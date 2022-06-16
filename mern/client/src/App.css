@@ -6,10 +6,10 @@ Color Palette "room for comfort":
     #eeede7
 */
 html{
-    background-color: #e7d2cc;
+    background-color: #868b8e;
 }
 body{
-    background-color: #eeede7;
+    background-color: #e7d2cc;
     width: 960px;
     margin: auto;
 }
@@ -25,4 +25,3 @@ body{
     display: flex;
     justify-content: center;
 }
-

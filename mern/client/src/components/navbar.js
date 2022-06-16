@@ -12,7 +12,7 @@ export default function Navbar() {
    <div id="navbar">
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
        <NavLink className="navbar-brand" to="/">
-       <img src="assets/movie-trivia.png" alt="Movie Trivia" style={{"width" : 50 + '%'}} id="logo"></img>
+       <img src="assets/movie-trivia.png" alt="Movie Trivia" style={{"width" : 25 + '%'}} id="logo"></img>
        </NavLink>
        <button
          className="navbar-toggler"
@@ -26,15 +26,6 @@ export default function Navbar() {
          <span className="navbar-toggler-icon"></span>
        </button>
 
-       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul className="navbar-nav ml-auto">
-           <li className="nav-item">
-             <NavLink className="nav-link" to="/results">
-               Show Trivia Results
-             </NavLink>
-           </li>
-         </ul>
-       </div>
 
      </nav>
    </div>
