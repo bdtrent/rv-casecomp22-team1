@@ -6,6 +6,7 @@ const quizzes = [
     { id: 1, name: "Horror"},
     { id: 2, name: "Rom-Com"}
 ];
+
 export default function Homepage(){
     return(
         <div>
@@ -16,7 +17,7 @@ export default function Homepage(){
                         return(
                             <Col key={quizzes.id}>
                                 <Card style={{ width: '18rem' }}>
-                                <Card.Img variant="top" src="assets/Horror.png/100px180" />
+                                <Card.Img class="cardCover" variant="top" src={"assets/"+quizzes.name+".png"} />
                                 <Card.Body>
                                     <Card.Title>{quizzes.name} Trivia</Card.Title>
                                     <Card.Text>
